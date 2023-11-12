@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 15:40:33 by albagarc          #+#    #+#             */
-/*   Updated: 2023/11/12 17:24:40 by albagarc         ###   ########.fr       */
+/*   Updated: 2023/11/12 18:06:29 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ class	Bureaucrat
 		class 				GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char * what() const throw(); //por que es VIRTUAL????? 
+				virtual const char * what() const throw(); 
 		};
 		class 				GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char * what() const throw(); //por que es VIRTUAL?????
+				virtual const char * what() const throw(); 
 		};
 	
 };
+
+std::ostream &	operator<<( std::ostream &out, const Bureaucrat  &object );
 
 #endif
