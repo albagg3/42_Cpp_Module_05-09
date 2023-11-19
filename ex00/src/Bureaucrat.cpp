@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:40:25 by albagarc          #+#    #+#             */
-/*   Updated: 2023/11/12 18:32:04 by albagarc         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:31:28 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	Bureaucrat::getGrade() const
 	return this->_grade;
 }
 
+
+//Member Functions
 void	Bureaucrat::incrementGrade()
 {
 	if (this->_grade - 1 < 1)
@@ -88,8 +90,9 @@ void	Bureaucrat::decrementGrade()
 	std::cout << this->getName() << "'s new grade is " << this->_grade << std::endl;
 	return ;
 }
-//Exceptions
 
+
+//Exceptions
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return ("The maximum grade for a bureaucrat is 1");
@@ -100,8 +103,8 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 	return ("The minimum grade for a bureaucrat is 150");
 }
 
-
-std::ostream &	operator<<( std::ostream &out, const Bureaucrat  &object )
+//<<  operator
+std::ostream&	operator<<(std::ostream& out, const Bureaucrat& object)
 {
 	out << object.getName() << ", bureaucrat grade " << object.getGrade() << "." << std::endl;;
     return out;

@@ -6,12 +6,12 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:40:25 by albagarc          #+#    #+#             */
-/*   Updated: 2023/11/12 18:32:04 by albagarc         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:35:34 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/Bureaucrat.hpp"
-
+#include "../inc/Form.hpp"
 //Default constructor
 Bureaucrat::Bureaucrat() : _name(), _grade(0)
 {
@@ -69,6 +69,7 @@ int	Bureaucrat::getGrade() const
 	return this->_grade;
 }
 
+//Member functions
 void	Bureaucrat::incrementGrade()
 {
 	if (this->_grade - 1 < 1)
@@ -87,6 +88,19 @@ void	Bureaucrat::decrementGrade()
 		this->_grade++;
 	std::cout << this->getName() << "'s new grade is " << this->_grade << std::endl;
 	return ;
+}
+
+
+void	Bureaucrat::signForm(Form& form)
+{
+	try {
+		form.beSigned(*this);
+		std::cout << GREEN << this->getName() << " signed " << form.getName() << RESET << std::endl;
+	}
+	catch (Form::GradeTooLowException &e){
+		std::cout << RED << this->getName() << " couldn't sign " << form.getName() 
+		<< " because " << e.what() << std::endl;
+	}
 }
 //Exceptions
 
