@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:12:20 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/09 15:28:03 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:58:17 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #define SHRUBBERYCREATIONFORM_H
 
 #include "AForm.hpp"
-#include "fstream"
-#include "Bureaucrat.hpp"
+#include <fstream>
 
 class ShrubberyCreationForm : public AForm
 {
@@ -28,7 +27,7 @@ class ShrubberyCreationForm : public AForm
 	public:
 		ShrubberyCreationForm(const std::string& target);					//Creates a ShrubberyForm with target
 		ShrubberyCreationForm(const ShrubberyCreationForm& original);		//Copy constructor
-		~ShrubberyCreationForm();											//Destructor
+		~ShrubberyCreationForm();											//Destructor		
 
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& rhs); // assignation operator
 

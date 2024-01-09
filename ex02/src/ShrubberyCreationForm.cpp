@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:12:20 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/09 15:55:32 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:44:20 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Default", 145, 137)
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : 	AForm("ShrubberyCreationForm", 145, 137),
 																			_target(target) 	
 {
-	std::cout << GREY << "Constructor with target: "<< this->_target << " called" << RESET << std::endl;
+	std::cout << GREY << "Constructor Shrubbery Creation Form with target: "<< this->_target << " called" << RESET << std::endl;
 }
 
 //Copy Constructor
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& original): 	AForm(original),
 																						_target(original._target)
 {
-	std::cout << GREY << "Copy Constructor with target: "<< this->_target << " called" << RESET << std::endl;
+	std::cout << GREY << "Copy Constructor Shrubbery Creation Form  with target: "<< this->_target << " called" << RESET << std::endl;
 }
 
 //Destructor
