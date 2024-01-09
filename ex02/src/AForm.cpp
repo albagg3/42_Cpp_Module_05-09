@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:43:26 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/09 12:55:10 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:51:41 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,22 @@ void	AForm::beSigned(const Bureaucrat& bureaucrat)
 	{
 		throw AForm::GradeTooLowException();
 	}
+}
+
+void	AForm::execute(const Bureaucrat& executor) const
+{
+	if(!this->getIsSigned())
+	{
+		throw AForm::FormNotSigned();
+	}
+	if(executor.getGrade() > this->getGradeToExecute())
+	{
+		throw AForm::GradeTooHighException();
+	}
+	//llamar a executeForm
+	
+	this->executingForm();
+	std::cout << executor.getName() << " executed " << this->getName() << std::endl;
 }
 
 

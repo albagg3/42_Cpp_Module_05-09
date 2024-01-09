@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:12:20 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/09 13:06:46 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:55:32 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,23 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 	std::cout << GREY << "Destructor ShrubberyCreationForm called" << RESET << std::endl;
 }
 
-void	ShrubberyCreationForm::execute(const Bureaucrat& executor) const
+//Assignation operator
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& rhs)
 {
-	if(!this->getIsSigned())
-	{
-		throw AForm::FormNotSigned();
-	}
-	if(executor.getGrade() > this->getGradeToExecute())
-	{
-		throw AForm::GradeTooHighException();
-	}
-	std::ofstream file(this->_target);
+	// WHY IS NOT ALLOWED??
+	(void) rhs;
+	// if(this == &rhs)
+	// 	return *this;
+	// this->_target = rhs._target;
+	// std::cout << GREY << "ShrubberyCreationForm asignation operator was called" << RESET << std::endl;
+	return *this;
+}
+
+
+//Member function
+void	ShrubberyCreationForm::executingForm() const
+{
+	std::ofstream file(this->_target + "_shrubbery");
 	file << YELLOW << "     _\\/_" << RESET << std::endl;
 	file << YELLOW << "      /\\ " << RESET << std::endl;
 	file << GREEN << "      /\\ " << RESET << std::endl;
@@ -64,6 +70,7 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& executor) const
 	file.close();
 }
 
+//Overload operator
 std::ostream& operator<<(std::ostream& out, const ShrubberyCreationForm& object)
 {
 	out << "Form name: " << object.getName() << " , is it signed?: " << object.getIsSigned() 
