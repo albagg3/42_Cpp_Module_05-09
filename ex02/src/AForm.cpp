@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:43:26 by albagarc          #+#    #+#             */
-/*   Updated: 2023/11/19 19:04:17 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/09 12:55:10 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,17 @@ const char *AForm::GradeTooLowException::what() const throw()
 	return ("The grade of the AForm is too low");
 }
 
+const char *AForm::FormNotSigned::what() const throw()
+{
+	return("The form is not signed");
+}
+
+//Overload operand
 std::ostream& operator<<(std::ostream& out, const AForm& object)
 {
 	out << "AForm name: " << object.getName() << " , is it signed?: " << object.getIsSigned() 
 	<< ". Only bureaucrats with grade " 
 	<< object.getGradeToSign() << " can sign it and bureaucrats with grade " 
-	<< object.getGradeToExecute() << "can execute it." << std::endl; 
+	<< object.getGradeToExecute() << " can execute it." << std::endl; 
 	return out;
 }
