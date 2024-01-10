@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:16:27 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:11:56 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:15:40 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ class PresidentialPardonForm : public AForm
 		PresidentialPardonForm();
 		void executingForm() const;
 
-
 	public:
 		PresidentialPardonForm(const std::string& target);
 		PresidentialPardonForm(const PresidentialPardonForm& original);
 		~PresidentialPardonForm();
 
 		PresidentialPardonForm &operator=(const PresidentialPardonForm& rhs);
-
+		AForm*	clone();
 };
 
 std::ostream&	operator<<(std::ostream &out, const PresidentialPardonForm &object);

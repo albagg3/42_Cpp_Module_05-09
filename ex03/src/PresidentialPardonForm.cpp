@@ -1,69 +1,68 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 15:59:09 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:14:15 by albagarc         ###   ########.fr       */
+/*   Created: 2024/01/09 15:59:01 by albagarc          #+#    #+#             */
+/*   Updated: 2024/01/10 15:18:22 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/RobotomyRequestForm.hpp"
+#include "../inc/PresidentialPardonForm.hpp"
 
 //Default Constructor
-RobotomyRequestForm::RobotomyRequestForm() : AForm("Default", 72, 45)
+PresidentialPardonForm::PresidentialPardonForm() : AForm("Default", 25, 5)
 {
 	std::cout << GREY << "Default Presidential Pardon Form called" << RESET << std::endl;
 }
 
 //Constructor with target
-RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : 	AForm("RobotomyRequestForm", 72, 45),
+PresidentialPardonForm::PresidentialPardonForm(const std::string& target) :  AForm("presidential pardon", 25, 5),
 																			_target(target) 	
 {
 	std::cout << GREY << "Constructor Presidential Pardon Form with target: "<< this->_target << " called" << RESET << std::endl;
 }
 
 //Copy Constructor
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& original): 	AForm(original),
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& original): 	AForm(original),
 																						_target(original._target)
 {
 	std::cout << GREY << "Copy Constructor Presidential Pardon Form with target: "<< this->_target << " called" << RESET << std::endl;
 }
 
 //Destructor
-RobotomyRequestForm::~RobotomyRequestForm()
+PresidentialPardonForm::~PresidentialPardonForm()
 {
-	std::cout << GREY << "Destructor RobotomyRequestForm called" << RESET << std::endl;
+	std::cout << GREY << "Destructor PresidentialPardonForm called" << RESET << std::endl;
 }
 
 //Assignation operator
-RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& rhs)
+PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& rhs)
 {
 	(void) rhs;
-	
-	std::cout << GREY << "RobotomyRequestForm asignation operator was called" << RESET << std::endl;
+
+	std::cout << GREY << "PresidentialPardonForm asignation operator was called" << RESET << std::endl;
 	return *this;
 }
 
 
 //Member function
-void	RobotomyRequestForm::executingForm() const
+void	PresidentialPardonForm::executingForm() const
 {
-	srand(time(NULL));
-	int random;
-	random = 1 + (rand() % 100);
+	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
+}
 
-	std::cout << "~~~Drilling noises~~~" << std::endl;
-	if(random % 2 == 0)
-		std::cout << this->_target << " has been robotomized" << std::endl; 
-	else
-		std::cout << "Robotom failed" << std::endl;
+AForm* PresidentialPardonForm::clone() 
+{
+	AForm* clone;
+	clone = new PresidentialPardonForm(*this);
+	return clone;
 }
 
 //Overload operator
-std::ostream& operator<<(std::ostream& out, const RobotomyRequestForm& object)
+std::ostream& operator<<(std::ostream& out, const PresidentialPardonForm& object)
 {
 	out << "Form name: " << object.getName() << " , is it signed?: " << object.getIsSigned() 
 	<< ". Only bureaucrats with grade " 

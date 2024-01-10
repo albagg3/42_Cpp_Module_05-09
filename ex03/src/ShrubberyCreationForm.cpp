@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:12:20 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:13:42 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:18:56 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Default", 145, 137)
 }
 
 //Constructor with target
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : 	AForm("ShrubberyCreationForm", 145, 137),
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : 	AForm("shrubbery creation", 145, 137),
 																			_target(target) 	
 {
 	std::cout << GREY << "Constructor Shrubbery Creation Form with target: "<< this->_target << " called" << RESET << std::endl;
@@ -65,6 +65,13 @@ void	ShrubberyCreationForm::executingForm() const
 	file << RED << "    \\====/ " << RESET << std::endl;
 	file << RED << "     \\__/ " << RESET << std::endl;
 	file.close();
+}
+
+AForm* ShrubberyCreationForm::clone() 
+{
+	AForm* clone;
+	clone = new ShrubberyCreationForm(*this);
+	return clone;
 }
 
 //Overload operator

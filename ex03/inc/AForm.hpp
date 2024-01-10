@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:43:13 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 12:43:31 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:45:36 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ class AForm
 		const 	int& 			getGradeToExecute() const;
 		void					beSigned(const Bureaucrat& bureaucrat);
 		void					execute(const Bureaucrat& executor) const;
-		
+		virtual AForm*			clone() = 0;
 
 		class	GradeTooHighException : public std::exception
 		{

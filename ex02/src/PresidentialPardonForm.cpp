@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:59:01 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/09 16:45:05 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:12:53 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ PresidentialPardonForm::~PresidentialPardonForm()
 //Assignation operator
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& rhs)
 {
-	// WHY IS NOT ALLOWED??
+	//The  _target is const so we can't change it once is created.
 	(void) rhs;
-	// if(this == &rhs)
-	// 	return *this;
-	// this->_target = rhs._target;
-	// std::cout << GREY << "PresidentialPardonForm asignation operator was called" << RESET << std::endl;
+
+	std::cout << GREY << "PresidentialPardonForm asignation operator was called" << RESET << std::endl;
 	return *this;
 }
 

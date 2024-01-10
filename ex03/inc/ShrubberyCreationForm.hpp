@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:12:20 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:11:59 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:14:34 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class ShrubberyCreationForm : public AForm
 		~ShrubberyCreationForm();											//Destructor		
 
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& rhs); // assignation operator
-
+		AForm*	clone() ;
 
 };
 
