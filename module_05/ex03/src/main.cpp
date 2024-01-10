@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 17:13:28 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:22:22 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:42:31 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int main ()
 		scf = someRandomIntern.makeForm("shrubbery creation", "Tree");
 		ppf = someRandomIntern.makeForm("presidential pardon", "Wiii");
 		notform = someRandomIntern.makeForm("ddd", "no exist");
+		delete rrf;
+		delete scf;
+		delete ppf;
 
 	}
 	catch(std::exception &e){
