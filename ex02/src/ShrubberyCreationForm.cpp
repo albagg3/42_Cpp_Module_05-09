@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:12:20 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:13:42 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:22:10 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Default", 145, 137)
 }
 
 //Constructor with target
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : 	AForm("ShrubberyCreationForm", 145, 137),
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : 	AForm("shrubbery creation", 145, 137),
 																			_target(target) 	
 {
 	std::cout << GREY << "Constructor Shrubbery Creation Form with target: "<< this->_target << " called" << RESET << std::endl;
@@ -39,6 +39,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 }
 
 //Assignation operator
+//The  _target is const so we can't change it once is created.
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& rhs)
 {
 	(void) rhs;

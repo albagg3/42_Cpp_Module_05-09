@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:43:26 by albagarc          #+#    #+#             */
-/*   Updated: 2023/11/19 18:57:38 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:24:09 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ const std::string&	Form::getName() const
 {
 	return this->_name;
 }
-//si es solo de lectura porque no me deja poner el const al final
+
 const bool&	Form::getIsSigned() const 
 {
 	return this->_isSigned;
@@ -90,7 +90,6 @@ void	Form::beSigned(const Bureaucrat& bureaucrat)
 		throw Form::GradeTooLowException();
 	}
 }
-
 
 //Exceptions
 const char *Form::GradeTooHighException::what() const throw()

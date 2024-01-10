@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 10:42:23 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 16:11:58 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:26:36 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ Intern& Intern::operator=(const Intern& rhs)
 	(void) rhs;
 	return *this;
 }
-
 
 //Member functions
 AForm* Intern::createShrubbery(const std::string& target) const
@@ -71,8 +70,11 @@ AForm *Intern::makeForm(std::string name, const std::string target)
 	for(int i = 0; i < 3; i++)
 	{
 		if(names[i] == name)
+		{
+			std::cout << GREEN << "Intern creates " << names[i] << RESET << std::endl;
 			return ((this->*createForm[ i ])( target ));
+		}
 	}
-	std::cout << "Intern not allowed to create that form" << std::endl;
+	std::cout << RED << "Intern not allowed to create that form" << RESET << std::endl;
 	return nullptr;
 }

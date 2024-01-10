@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:43:13 by albagarc          #+#    #+#             */
-/*   Updated: 2023/11/19 18:19:43 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:20:28 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <iostream>
 #include <exception>
-// #include "Bureaucrat.hpp"
 
 #define RED "\e[91m"
 #define GREEN "\e[92m"

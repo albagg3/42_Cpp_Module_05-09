@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:59:09 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:18:40 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:19:58 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@ void	RobotomyRequestForm::executingForm() const
 		std::cout << this->_target << " has been robotomized" << std::endl; 
 	else
 		std::cout << "Robotom failed" << std::endl;
-}
-
-AForm* RobotomyRequestForm::clone()
-{
-	AForm* clone;
-	clone = new RobotomyRequestForm(*this);
-	return clone;
 }
 
 //Overload operator

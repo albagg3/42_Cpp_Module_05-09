@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 16:40:25 by albagarc          #+#    #+#             */
-/*   Updated: 2023/11/19 18:31:28 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:17:06 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,9 @@ Bureaucrat::Bureaucrat() : _name(), _grade(0)
 }
 
 //Copy constructor
-Bureaucrat::Bureaucrat(const Bureaucrat& original) : _name(original._name), _grade(original._grade) //asi inicializamos el burocrata con este valor
+//The variable name is const if we don't initiate the constructor with the value, it will be impossible to change it. 
+Bureaucrat::Bureaucrat(const Bureaucrat& original) : _name(original._name), _grade(original._grade) 
 {
-	// esto esta mal porque se supone que ya se habria inicializado el valor con algo aunque fuera vacio y no podrias modificarlo
-	// this->_name = original._name; 
-	// this->_grade = original._grade;
-	
 	std::cout << GREY << "Copied Bureaucrat " << this->_name << " with grade: " << this->_grade << " copy constructor called" << RESET << std::endl;
 }
 
@@ -47,11 +44,13 @@ Bureaucrat::~Bureaucrat()
 }
 
 //Assignation operator
+//The name is const so it won't be allowed to equal it.
+//First we always check if the pointers are the same so we don't equal an object to itself.
+//We return *this because the compiler needs to return an object itself.
 Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& rhs)
 {
-	if (this == &rhs)// comparamos si los punteros son iguales y estamos intentando igualar un objeto a si mismo 
-		return *this; //El compilador necesita que le devuelva un objeto concreto aunque luego es una referencia&
-	// this->_name = rhs._name;
+	if (this == &rhs)
+		return *this;
 	this->_grade = rhs._grade;
 	std::cout << GREY << "Bureaucrat asignation operator was called" << RESET << std::endl;
 	std::cout << GREY << "Bureaucrat " << this->_name << " now have grade " << this->_grade << RESET << std::endl;
@@ -68,7 +67,6 @@ int	Bureaucrat::getGrade() const
 {
 	return this->_grade;
 }
-
 
 //Member Functions
 void	Bureaucrat::incrementGrade()
@@ -91,16 +89,15 @@ void	Bureaucrat::decrementGrade()
 	return ;
 }
 
-
 //Exceptions
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("The maximum grade for a bureaucrat is 1");
+	return (RED"The maximum grade for a bureaucrat is 1");
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("The minimum grade for a bureaucrat is 150");
+	return (RED"The minimum grade for a bureaucrat is 150");
 }
 
 //<<  operator

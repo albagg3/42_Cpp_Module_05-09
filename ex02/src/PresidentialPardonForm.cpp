@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:59:01 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:12:53 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:22:14 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ PresidentialPardonForm::PresidentialPardonForm() : AForm("Default", 25, 5)
 }
 
 //Constructor with target
-PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : 	AForm("PresidentialPardonForm", 25, 5),
+PresidentialPardonForm::PresidentialPardonForm(const std::string& target) : AForm("presidential pardon", 25, 5),
 																			_target(target) 	
 {
 	std::cout << GREY << "Constructor Presidential Pardon Form with target: "<< this->_target << " called" << RESET << std::endl;
 }
 
 //Copy Constructor
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& original): 	AForm(original),
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& original): AForm(original),
 																						_target(original._target)
 {
 	std::cout << GREY << "Copy Constructor Presidential Pardon Form with target: "<< this->_target << " called" << RESET << std::endl;
@@ -39,15 +39,14 @@ PresidentialPardonForm::~PresidentialPardonForm()
 }
 
 //Assignation operator
+//The  _target is const so we can't change it once is created.
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& rhs)
 {
-	//The  _target is const so we can't change it once is created.
 	(void) rhs;
 
 	std::cout << GREY << "PresidentialPardonForm asignation operator was called" << RESET << std::endl;
 	return *this;
 }
-
 
 //Member function
 void	PresidentialPardonForm::executingForm() const

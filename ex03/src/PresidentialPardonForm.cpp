@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:59:01 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:18:22 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:20:00 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,6 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 void	PresidentialPardonForm::executingForm() const
 {
 	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
-}
-
-AForm* PresidentialPardonForm::clone() 
-{
-	AForm* clone;
-	clone = new PresidentialPardonForm(*this);
-	return clone;
 }
 
 //Overload operator

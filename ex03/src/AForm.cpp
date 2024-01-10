@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:43:26 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/09 15:51:41 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:23:28 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ AForm::AForm() : _name(), _isSigned(false), _grade_to_sign(0), _grade_to_execute
 
 //Copy constructor
 AForm::AForm(const AForm& original) : 	_name(original._name),
-									_isSigned(original._isSigned),
-									_grade_to_sign(original._grade_to_sign),
-									_grade_to_execute(original._grade_to_execute)
+										_isSigned(original._isSigned),
+										_grade_to_sign(original._grade_to_sign),
+										_grade_to_execute(original._grade_to_execute)
 {
 	std::cout << GREY << "AForm Copy constructor called" << RESET << std::endl;
 }
@@ -62,7 +62,7 @@ const std::string&	AForm::getName() const
 {
 	return this->_name;
 }
-//si es solo de lectura porque no me deja poner el const al final
+
 const bool&	AForm::getIsSigned() const 
 {
 	return this->_isSigned;
@@ -101,8 +101,6 @@ void	AForm::execute(const Bureaucrat& executor) const
 	{
 		throw AForm::GradeTooHighException();
 	}
-	//llamar a executeForm
-	
 	this->executingForm();
 	std::cout << executor.getName() << " executed " << this->getName() << std::endl;
 }

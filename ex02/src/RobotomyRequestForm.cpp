@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 15:59:09 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:14:15 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:22:12 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm("Default", 72, 45)
 }
 
 //Constructor with target
-RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : 	AForm("RobotomyRequestForm", 72, 45),
-																			_target(target) 	
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : 	AForm("robotomy request", 72, 45),
+																		_target(target) 	
 {
 	std::cout << GREY << "Constructor Presidential Pardon Form with target: "<< this->_target << " called" << RESET << std::endl;
 }
 
 //Copy Constructor
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& original): 	AForm(original),
-																						_target(original._target)
+																				_target(original._target)
 {
 	std::cout << GREY << "Copy Constructor Presidential Pardon Form with target: "<< this->_target << " called" << RESET << std::endl;
 }
@@ -39,6 +39,7 @@ RobotomyRequestForm::~RobotomyRequestForm()
 }
 
 //Assignation operator
+//The  _target is const so we can't change it once is created.
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& rhs)
 {
 	(void) rhs;

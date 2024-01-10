@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 17:13:28 by albagarc          #+#    #+#             */
-/*   Updated: 2023/11/12 18:39:36 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:14:57 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int main ()
 {
 //Simple canonical class testing
+	std::cout << YELLOW << "CANONICAL CLASS TESTING" << RESET << std::endl;
 	Bureaucrat 	buro1("Matias", 10);
 	std::cout << buro1;
 	Bureaucrat	buro2(buro1);
@@ -25,7 +26,7 @@ int main ()
 	std::cout << buro2;
 
 //Trying to catch specific exceptions
-std::cout << GREEN << "Trying to create a bureaucrat with level higher than 160 and lower than 1 catching the errors with specific exceptions" << RESET << std::endl;
+	std::cout << YELLOW << "Trying to create a bureaucrat with level higher than 160 and lower than 1 catching the errors with specific exceptions" << RESET << std::endl;
 	try
 	{
 		Bureaucrat 	buro4("Lola", 160);
@@ -42,7 +43,7 @@ std::cout << GREEN << "Trying to create a bureaucrat with level higher than 160 
 	}
 
 //Calling any type of exception
-std::cout << GREEN << "Trying to create a bureaucrat with level lower than 1 catching the error with standard exceptions" << RESET << std::endl;
+	std::cout << YELLOW << "Trying to create a bureaucrat with level lower than 1 catching the error with standard exceptions" << RESET << std::endl;
 	try
 	{
 		Bureaucrat 	buro6("Arturo", 0);
@@ -52,7 +53,7 @@ std::cout << GREEN << "Trying to create a bureaucrat with level lower than 1 cat
 		std::cout << e.what() << std::endl;
 	}
 
-std::cout << GREEN << "Trying to decrease a bureaucrat with level 2 lower than 1" << RESET << std::endl;
+	std::cout << YELLOW << "Trying to decrease a bureaucrat with level 2 lower than 1" << RESET << std::endl;
 	try
 	{
 		Bureaucrat 	buro4("Lola", 2);
@@ -65,7 +66,7 @@ std::cout << GREEN << "Trying to decrease a bureaucrat with level 2 lower than 1
 		std::cout << e.what() << std::endl;
 	}
 
-std::cout << GREEN << "Trying to decrease a bureaucrat with level 148 lower than 150" << RESET << std::endl;
+	std::cout << YELLOW << "Trying to decrease a bureaucrat with level 148 lower than 150" << RESET << std::endl;
 	try
 	{
 		Bureaucrat 	buro4("Arturo", 148);
@@ -77,6 +78,4 @@ std::cout << GREEN << "Trying to decrease a bureaucrat with level 148 lower than
 	{
 		std::cout << e.what() << std::endl;
 	}
-
-	
 }
