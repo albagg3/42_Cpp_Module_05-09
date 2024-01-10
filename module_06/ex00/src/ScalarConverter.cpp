@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 17:13:28 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 18:17:43 by albagarc         ###   ########.fr       */
+/*   Created: 2024/01/10 18:16:32 by albagarc          #+#    #+#             */
+/*   Updated: 2024/01/10 18:20:46 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Bureaucrat.hpp"
+#ifndef SCALARCONVERTER_H
+# define SCALARCONVERTER_H
 
-int main (int argc, char **argv)
+class ScalarConverter 
 {
-	if(argc != 2)
-	{
-		
-	}
-	else
-	{
+	private:
+	public:
+		ScalarConverter();
+		ScalarConverter(const ScalarConverter& original);
+		~ScalarConverter();
 
-	}
+		ScalarConverter&	operator=(const ScalarConverter& rhs);
+
+		void	convert(std::string input);
 }
+
+#endif
