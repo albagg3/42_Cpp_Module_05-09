@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:12:20 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:18:56 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:11:03 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,6 @@ void	ShrubberyCreationForm::executingForm() const
 	file << RED << "    \\====/ " << RESET << std::endl;
 	file << RED << "     \\__/ " << RESET << std::endl;
 	file.close();
-}
-
-AForm* ShrubberyCreationForm::clone() 
-{
-	AForm* clone;
-	clone = new ShrubberyCreationForm(*this);
-	return clone;
 }
 
 //Overload operator

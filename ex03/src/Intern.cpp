@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 10:42:23 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 16:07:50 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:11:58 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ AForm* Intern::createPresidential(const std::string& target) const
 	return (form_created);
 }
 
+//There are 2 arrays declared in the function, one with the names of the forms 
+//the other one is an array of Intern functions that receive an string as a parameter.
 AForm *Intern::makeForm(std::string name, const std::string target)
 {
 	std::string names[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
-	//array de funciones Intern que reciben un parametro que es un string
 	AForm	*(Intern::*createForm[ 3 ])( const std::string& ) const = { &Intern::createShrubbery, &Intern::createRobotomy, &Intern::createPresidential};
 
 	for(int i = 0; i < 3; i++)

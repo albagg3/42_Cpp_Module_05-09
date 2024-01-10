@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:16:32 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 15:14:27 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:10:29 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ class RobotomyRequestForm : public AForm
 		~RobotomyRequestForm();
 
 		RobotomyRequestForm& operator=(const RobotomyRequestForm& rhs);
-		AForm*	clone();
 };
 
 std::ostream&	operator<<(std::ostream out, const RobotomyRequestForm& object);
