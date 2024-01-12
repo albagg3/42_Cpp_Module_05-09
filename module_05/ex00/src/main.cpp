@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 17:13:28 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/10 17:14:57 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:15:22 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main ()
 {
 //Simple canonical class testing
-	std::cout << YELLOW << "CANONICAL CLASS TESTING" << RESET << std::endl;
+	std::cout << YELLOW << "CANONICAL CLASS TESTING" << std::endl;
 	Bureaucrat 	buro1("Matias", 10);
 	std::cout << buro1;
 	Bureaucrat	buro2(buro1);
