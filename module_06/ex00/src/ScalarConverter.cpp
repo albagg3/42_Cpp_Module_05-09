@@ -12,6 +12,7 @@
 
 #include "../inc/ScalarConverter.hpp"
 
+
 //Constructor default
 ScalarConverter::ScalarConverter()
 {
@@ -40,7 +41,10 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& rhs)
 //Aux functions
 bool	is_char(std::string input)
 {
-	if()
+	if(input.length() != 1)
+		return false;
+	else if (input[0] <= 31 && input[0] >= 127)
+
 }
 
 void	check_input_type(std::string input)

@@ -13,6 +13,7 @@
 #ifndef SCALARCONVERTER_H
 # define SCALARCONVERTER_H
 
+#include <iostream>
 class ScalarConverter 
 {
 	private:
