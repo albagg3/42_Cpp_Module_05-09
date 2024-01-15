@@ -6,12 +6,12 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:16:32 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/15 11:53:44 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:05:04 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ScalarConverter.hpp"
-
+#include <string> 
 
 //Constructor default
 ScalarConverter::ScalarConverter()
@@ -45,15 +45,23 @@ bool	isChar(std::string input)
 {
 	if(input.length() != 1)
 		return false;
-	else if (input[0] <= 31 && input[0] >= 127)
-		return false;
-	//not displayable
-	return true;
-
+	// else if (input[0] <= 31 || input[0] >= 127)
+	// 	return false;
+	else
+		return true;
 
 }
+std::string	printChar(std::string input)
+{
+	if (input[0] <= 31 || input[0] == 127)
+		return "Non displayable";
+	else if (input[0] > 127)
+		return "imposible";
+	else
+		return input;
+}
 
-bool	checkInputValid(std::string input)
+bool	isValidInput(std::string input)
 {
 	if (isChar(input))
 		return true;
@@ -68,12 +76,21 @@ bool	checkInputValid(std::string input)
 
 void	ftPrintScalar(std::string input)
 {
-	long double input_to_num;
-	input_to_num = std::stold(input);
-	std::cout << "char: " << static_cast<char>(input[0]) << std::endl;
-	std::cout << "int: " << static_cast<int>(input_to_num) << std::endl;
-	std::cout << "float: " << static_cast<float>(input_to_num) << std::endl;
-	std::cout << "double: " << static_cast<double>(input_to_num) << std::endl;
+	// long double input_to_num;
+	// input_to_num = std::stold(input);
+	std::string char_str;
+	if (isValidInput(input))
+	{
+		char_str = printChar(input);
+
+		std::cout << "char: " << char_str << std::endl;
+		// std::cout << "int: " << static_cast<int>(input_to_num) << std::endl;
+		// std::cout << "float: " << static_cast<float>(input_to_num) << std::endl;
+		// std::cout << "double: " << static_cast<double>(input_to_num) << std::endl;
+
+	}
+	else
+		std::cout << "Invalid input" << std::endl;
 
 }
 
@@ -81,6 +98,5 @@ void	ftPrintScalar(std::string input)
 void ScalarConverter::convert(std::string input)
 {
 	
-	checkInputValid(input);
 	ftPrintScalar(input);
 }
