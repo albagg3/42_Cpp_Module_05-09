@@ -71,20 +71,17 @@ bool	isPossibleToPrintChar(long double input)
 
 bool	isFloat(std::string input, std::size_t idx)
 {
-	// long double float_input;
-	// std::size_t idx;
-
 	try{
 		if(input[idx] == 'f')
 		{
+			if(input[idx + 1] == '\0' && input.find('.') != std::string::npos)
+				return true;
 			std::cout << "Por aqu'i estoy" << std::endl;
-			return true;
 		}
 		return false;
 
 	}
 	catch(std::exception &e){
-		// std::cout << "Not an int" << std::endl;
 		return false;
 	}
 }
@@ -122,10 +119,35 @@ bool	isPossibleToPrintInt(long double input)
 	else
 		return true;
 }
+bool	isPossibleToPrintFloat(long double input)
+{
+	if (input < std::numeric_limits<float>::lowest() || input > std::numeric_limits<float>::max())
+	{
+		std::cout << "float: " << "Overflow" << std::endl;
+		return false;
+	}
+	else
+		return true;
+}
+bool	isPossibleToPrintDouble(long double input)
+{
+	if (input < std::numeric_limits<double>::lowest() || input > std::numeric_limits<double>::max())
+	{
+		std::cout << "double: " << "Overflow" << std::endl;
+		return false;
+	}
+	else
+		return true;
+}
 
 
 bool	isValidInput(std::string input)
 {
+	if(input[input.length() - 1]  == '.')
+	{
+		std::cout << "tengo un punto al final" << std::endl;
+		return false;
+	}
 	if (isChar(input))
 	{
 		std::cout << "Entra en char" << std::endl;
@@ -168,8 +190,14 @@ void	ftPrintScalar(std::string input)
 			{
 				std::cout << "int: " << static_cast<int>(input_long_double) << std::endl;
 			}
-			std::cout << "float: " << std::setprecision(1) << std::fixed << static_cast<float>(input_long_double) << "f" <<std::endl;
-			std::cout << "double: " << std::setprecision(1) << std::fixed << static_cast<double>(input_long_double) << std::endl;
+			if (isPossibleToPrintFloat(input_long_double))
+			{
+				std::cout << "float: " << std::setprecision(1) << std::fixed << static_cast<float>(input_long_double) << "f" <<std::endl;
+			}
+			if (isPossibleToPrintDouble(input_long_double))
+			{
+				std::cout << "double: " << std::setprecision(1) << std::fixed << static_cast<double>(input_long_double) << std::endl;
+			}
 			
 
 		}
@@ -188,3 +216,9 @@ void ScalarConverter::convert(std::string input)
 	
 	ftPrintScalar(input);
 }
+
+
+//21. 
+//21f
+//numero cero 0
+//nan nanf +inf +inff -inf -inff
