@@ -6,13 +6,13 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:16:32 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/15 13:05:04 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:40:43 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ScalarConverter.hpp"
 #include <string> 
-
+#include <iomanip>
 //Constructor default
 ScalarConverter::ScalarConverter()
 {
@@ -51,21 +51,49 @@ bool	isChar(std::string input)
 		return true;
 
 }
-std::string	printChar(std::string input)
+bool	isPossibleToPrintChar(long double input)
 {
-	if (input[0] <= 31 || input[0] == 127)
-		return "Non displayable";
-	else if (input[0] > 127)
-		return "imposible";
+	if (input <= 31 || input == 127)
+	{
+		std::cout << "char: " << "Non displayable" << std::endl;
+		return false;
+	}
+	else if (input > 127)
+	{
+		std::cout << "char: " << "Impossible" << std::endl;
+		return false;
+	}
 	else
-		return input;
+		return true;
 }
+
+bool	isInt(std::string input)
+{
+	int int_input;
+	try{
+		int_input = std::stoi(input);
+		return true;
+	}
+	catch(std::exception &e){
+		std::cout << "Not an int" << std::endl;
+		return false;
+	}
+}
+
+
 
 bool	isValidInput(std::string input)
 {
 	if (isChar(input))
+	{
+		std::cout << "Entra en char" << std::endl;
 		return true;
-	// else if (is_int(input))
+	}
+	else if (isInt(input))
+	{
+		std::cout << "Entra en int" << std::endl;
+		return true;
+	}
 	// else if (is_float(input))
 	// else if (is_double(input))
 	// else
@@ -76,17 +104,27 @@ bool	isValidInput(std::string input)
 
 void	ftPrintScalar(std::string input)
 {
-	// long double input_to_num;
-	// input_to_num = std::stold(input);
-	std::string char_str;
+	long double input_long_double;
+	try{
+		input_long_double = std::stold(input);
+
+	}
+	catch(std::exception &e)
+	{
+		std::cout << "exception:" << e.what() << std::endl;
+	}
+	
+	// std::cout << input_long_double << std::endl;
 	if (isValidInput(input))
 	{
-		char_str = printChar(input);
-
-		std::cout << "char: " << char_str << std::endl;
-		// std::cout << "int: " << static_cast<int>(input_to_num) << std::endl;
-		// std::cout << "float: " << static_cast<float>(input_to_num) << std::endl;
-		// std::cout << "double: " << static_cast<double>(input_to_num) << std::endl;
+		if(isPossibleToPrintChar(input_long_double))
+		{
+			std::cout << "char: " << static_cast<char>(input_long_double) << std::endl;
+		}
+		std::cout << "int: " << static_cast<int>(input_long_double) << std::endl;
+		std::cout << "float: " << std::setprecision(1) << std::fixed << static_cast<float>(input_long_double) << "f" <<std::endl;
+		std::cout << "double: " << std::setprecision(1) << std::fixed << static_cast<double>(input_long_double) << std::endl;
+		
 
 	}
 	else
