@@ -13,6 +13,8 @@
 #include "../inc/ScalarConverter.hpp"
 #include <string> 
 #include <iomanip>
+#include <limits>
+#include <cstdlib>// me la manda poner en gitcode
 //Constructor default
 ScalarConverter::ScalarConverter()
 {
@@ -67,19 +69,59 @@ bool	isPossibleToPrintChar(long double input)
 		return true;
 }
 
-bool	isInt(std::string input)
+bool	isFloat(std::string input, std::size_t idx)
 {
-	int int_input;
+	// long double float_input;
+	// std::size_t idx;
+
 	try{
-		int_input = std::stoi(input);
-		return true;
+		if(input[idx] == 'f')
+		{
+			std::cout << "Por aqu'i estoy" << std::endl;
+			return true;
+		}
+		return false;
+
 	}
 	catch(std::exception &e){
-		std::cout << "Not an int" << std::endl;
+		// std::cout << "Not an int" << std::endl;
 		return false;
 	}
 }
 
+bool	isIntOrFloatOrDouble(std::string input)
+{
+	long double int_input;
+	std::size_t idx;
+
+	try{
+		int_input = std::stold(input, &idx);
+		std::cout <<"en INT"<< int_input << " index:" << idx << std::endl;
+		if(idx != input.length())
+		{
+			
+			if(isFloat(input, idx))
+				return true;
+			return false;
+		}
+		return true;
+	}
+	catch(std::exception &e){
+		// std::cout << "Not an int" << std::endl;
+		return false;
+	}
+}
+
+bool	isPossibleToPrintInt(long double input)
+{
+	if (input < std::numeric_limits<int>::lowest() || input > std::numeric_limits<int>::max())
+	{
+		std::cout << "int: " << "Overflow" << std::endl;
+		return false;
+	}
+	else
+		return true;
+}
 
 
 bool	isValidInput(std::string input)
@@ -89,12 +131,15 @@ bool	isValidInput(std::string input)
 		std::cout << "Entra en char" << std::endl;
 		return true;
 	}
-	else if (isInt(input))
+	else if (isIntOrFloatOrDouble(input))
 	{
-		std::cout << "Entra en int" << std::endl;
+		std::cout << "Entra en int or float" << std::endl;
 		return true;
 	}
-	// else if (is_float(input))
+	// else if (isFloat(input))
+	// {
+
+	// }
 	// else if (is_double(input))
 	// else
 	return false;
@@ -106,30 +151,35 @@ void	ftPrintScalar(std::string input)
 {
 	long double input_long_double;
 	try{
-		input_long_double = std::stold(input);
+		if(input.length() == 1)
+			input_long_double =  static_cast<double>(input[0]);
+		else
+		{
+			input_long_double = std::stold(input);
+			std::cout << input_long_double << std::endl;
+		}
+		if (isValidInput(input))
+		{
+			if(isPossibleToPrintChar(input_long_double))
+			{
+				std::cout << "char: " << static_cast<char>(input_long_double) << std::endl;
+			}
+			if (isPossibleToPrintInt(input_long_double))
+			{
+				std::cout << "int: " << static_cast<int>(input_long_double) << std::endl;
+			}
+			std::cout << "float: " << std::setprecision(1) << std::fixed << static_cast<float>(input_long_double) << "f" <<std::endl;
+			std::cout << "double: " << std::setprecision(1) << std::fixed << static_cast<double>(input_long_double) << std::endl;
+			
 
+		}
+		else
+			std::cout << "Invalid input" << std::endl;
 	}
 	catch(std::exception &e)
 	{
-		std::cout << "exception:" << e.what() << std::endl;
+		std::cout << "The number is not formatted well " << std::endl;
 	}
-	
-	// std::cout << input_long_double << std::endl;
-	if (isValidInput(input))
-	{
-		if(isPossibleToPrintChar(input_long_double))
-		{
-			std::cout << "char: " << static_cast<char>(input_long_double) << std::endl;
-		}
-		std::cout << "int: " << static_cast<int>(input_long_double) << std::endl;
-		std::cout << "float: " << std::setprecision(1) << std::fixed << static_cast<float>(input_long_double) << "f" <<std::endl;
-		std::cout << "double: " << std::setprecision(1) << std::fixed << static_cast<double>(input_long_double) << std::endl;
-		
-
-	}
-	else
-		std::cout << "Invalid input" << std::endl;
-
 }
 
 //Static function
