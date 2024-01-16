@@ -6,16 +6,12 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:16:32 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/16 13:19:57 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:33:25 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ScalarConverter.hpp"
-#include <string> 
-#include <iomanip>
-#include <limits>
-#include <cstdlib>// me la manda poner en gitcode
-#include <cctype>
+
 //Constructor default
 ScalarConverter::ScalarConverter()
 {
@@ -48,14 +44,66 @@ bool	isChar(std::string input)
 {
 	if(input.length() != 1)
 		return false;
-	// else if (input[0] <= 31 || input[0] >= 127)
-	// 	return false;
 	else
 		return true;
-
 }
+
+//This function will parse the input to check if it could be a float
+//It checks if there is an f in the idx that the number ends
+//If there's only one point and if the f is the last character in the string
+bool	isFloat(std::string input, std::size_t idx)
+{
+	try{
+		if(input[idx] == 'f')
+		{
+			if(std::count(input.begin(), input.end(), '.') == 1)
+			{
+				int idx_point = input.find('.');
+				if(isdigit(input[idx_point + 1]))
+					return true;
+				else
+					return false;
+			}
+			if(input[idx + 1] == '\0')
+				return true;
+		}
+		return false;
+	}
+	catch(std::exception &e){
+		return false;
+	}
+}
+
+//This function will parse the input to check if it could be an int a float or a double
+bool	isIntOrFloatOrDouble(std::string input)
+{
+	long double int_input;
+	std::size_t idx;
+
+	try {
+		int_input = std::stold(input, &idx);
+		if (idx != input.length())
+		{
+			
+			if (isFloat(input, idx))
+				return true;
+			return false;
+		}
+		return true;
+	}
+	catch (std::exception &e){
+		return false;
+	}
+}
+
+//This function identifies if it is possible to print a char if not it will write the correct output
 bool	isPossibleToPrintChar(long double input)
 {
+	if (std::numeric_limits<double>::infinity() == input || -std::numeric_limits<double>::infinity() == input)
+	{
+		std::cout << "char: " << "Impossible" << std::endl;
+		return false;
+	}
 	if (input <= 31 || input == 127)
 	{
 		std::cout << "char: " << "Non displayable" << std::endl;
@@ -66,76 +114,51 @@ bool	isPossibleToPrintChar(long double input)
 		std::cout << "char: " << "Impossible" << std::endl;
 		return false;
 	}
+	else if (std::isnan(input))
+	{
+		std::cout << "char: " << "Impossible" << std::endl;
+		return false;
+	}
 	else
 		return true;
 }
 
-bool	isFloat(std::string input, std::size_t idx)
-{
-	try{
-		if(input[idx] == 'f')
-		{
-			std::cout<< "Estoy en float"<< std::endl;
-			if(std::count(input.begin(), input.end(), '.') == 1 ) //contiene soloo un punto 
-			{
-				std::cout << "entro a buscar el punto" << std::endl;
-				int idx_point = input.find('.');
-				if(isdigit(input[idx_point + 1]))
-					return true;
-				else
-					return false;
-			}
-			if(input[idx + 1] == '\0' /*&& input.find('.') != std::string::npos*/ )
-				return true;
-
-				
-			// if(input.find('.') != std::string::npos)
-			std::cout << "Por aqu'i estoy" << std::endl;
-		}
-		return false;
-
-	}
-	catch(std::exception &e){
-		return false;
-	}
-}
-
-bool	isIntOrFloatOrDouble(std::string input)
-{
-	long double int_input;
-	std::size_t idx;
-
-	try{
-		int_input = std::stold(input, &idx);
-		std::cout <<"en INT"<< int_input << " index:" << idx << std::endl;
-		if(idx != input.length())
-		{
-			
-			if(isFloat(input, idx))
-				return true;
-			return false;
-		}
-		return true;
-	}
-	catch(std::exception &e){
-		// std::cout << "Not an int" << std::endl;
-		return false;
-	}
-}
-
+//This function identifies if it is possible to print an int if not it will write the correct output
 bool	isPossibleToPrintInt(long double input)
 {
+	if (std::numeric_limits<double>::infinity() == input || -std::numeric_limits<double>::infinity() == input)
+	{
+		std::cout << "int: " << "Impossible" << std::endl;
+		return false;
+	}
 	if (input < std::numeric_limits<int>::lowest() || input > std::numeric_limits<int>::max())
 	{
 		std::cout << "int: " << "Overflow" << std::endl;
 		return false;
 	}
+	else if (std::isnan(input))
+	{
+		std::cout << "int: " << "Impossible" << std::endl;
+		return false;
+	}
 	else
 		return true;
 }
+
+//This function identifies if it is possible to print a float if not it will write the correct output
 bool	isPossibleToPrintFloat(long double input)
 {
-	if (input < std::numeric_limits<float>::lowest() || input > std::numeric_limits<float>::max())
+	if (-std::numeric_limits<double>::infinity() == input)
+	{
+		std::cout << "float: " << "-inff" << std::endl;
+		return false;
+	}
+	if (std::numeric_limits<double>::infinity() == input)
+	{
+		std::cout << "float: " << "inff" << std::endl;
+		return false;
+	}
+	else if (input < std::numeric_limits<float>::lowest() || input > std::numeric_limits<float>::max())
 	{
 		std::cout << "float: " << "Overflow" << std::endl;
 		return false;
@@ -143,9 +166,21 @@ bool	isPossibleToPrintFloat(long double input)
 	else
 		return true;
 }
+
+//This function identifies if it is possible to print a double if not it will write the correct output
 bool	isPossibleToPrintDouble(long double input)
 {
-	if (input < std::numeric_limits<double>::lowest() || input > std::numeric_limits<double>::max())
+	if (-std::numeric_limits<double>::infinity() == input)
+	{
+		std::cout << "double: " << "-inf" << std::endl;
+		return false;
+	}
+	if (std::numeric_limits<double>::infinity() == input)
+	{
+		std::cout << "double: " << "inf" << std::endl;
+		return false;
+	}
+	else if (input < std::numeric_limits<double>::lowest() || input > std::numeric_limits<double>::max())
 	{
 		std::cout << "double: " << "Overflow" << std::endl;
 		return false;
@@ -155,88 +190,47 @@ bool	isPossibleToPrintDouble(long double input)
 }
 
 
+//This function checks if the input introduced in the program can be a correct input or not
 bool	isValidInput(std::string input)
 {
-	if(input[input.length() - 1]  == '.')
-	{
-		std::cout << "tengo un punto al final" << std::endl;
+	if (input[input.length() - 1]  == '.')
 		return false;
-	}
 	if (isChar(input))
-	{
-		std::cout << "Entra en char" << std::endl;
 		return true;
-	}
 	else if (isIntOrFloatOrDouble(input))
-	{
-		std::cout << "Entra en int or float" << std::endl;
 		return true;
-	}
-	// else if (isFloat(input))
-	// {
-
-	// }
-	// else if (is_double(input))
-	// else
 	return false;
-
-
 }
 
-void	ftPrintScalar(std::string input)
-{
-	long double input_long_double;
-	try{
-		if(input.length() == 1 && !isdigit(input[0]))
-		{
-			std::cout << "Entro a castear el char" << std::endl;
-			input_long_double =  static_cast<double>(input[0]);
-			std::cout << "Input long double" << input_long_double << std::endl;
-		}
-		else
-		{
-			input_long_double = std::stold(input);
-			std::cout << input_long_double << std::endl;
-		}
-		if (isValidInput(input))
-		{
-			if(isPossibleToPrintChar(input_long_double))
-			{
-				std::cout << "char: " << static_cast<char>(input_long_double) << std::endl;
-			}
-			if (isPossibleToPrintInt(input_long_double))
-			{
-				std::cout << "int: " << static_cast<int>(input_long_double) << std::endl;
-			}
-			if (isPossibleToPrintFloat(input_long_double))
-			{
-				std::cout << "float: " << std::setprecision(1) << std::fixed << static_cast<float>(input_long_double) << "f" <<std::endl;
-			}
-			if (isPossibleToPrintDouble(input_long_double))
-			{
-				std::cout << "double: " << std::setprecision(1) << std::fixed << static_cast<double>(input_long_double) << std::endl;
-			}
-			
-
-		}
-		else
-			std::cout << "Invalid input" << std::endl;
-	}
-	catch(std::exception &e)
-	{
-		std::cout << "The number is not formatted well " << std::endl;
-	}
+//This function checks if it is possible to print the number and if it's positive will cast and print it 
+void	ftPrintScalar(long double input)
+{	
+	if(isPossibleToPrintChar(input))
+		std::cout << "char: " << static_cast<char>(input) << std::endl;
+	if (isPossibleToPrintInt(input))
+		std::cout << "int: " << static_cast<int>(input) << std::endl;
+	if (isPossibleToPrintFloat(input))
+		std::cout << "float: " << std::setprecision(1) << std::fixed << static_cast<float>(input) << "f" <<std::endl;
+	if (isPossibleToPrintDouble(input))
+		std::cout << "double: " << std::setprecision(1) << std::fixed << static_cast<double>(input) << std::endl;			
 }
 
 //Static function
 void ScalarConverter::convert(std::string input)
 {
+	long double input_long_double;
+	try{
+		if(input.length() == 1 && !isdigit(input[0]))
+			input_long_double =  static_cast<double>(input[0]);
+		else
+			input_long_double = std::stold(input);
+		if (isValidInput(input))
+			ftPrintScalar(input_long_double);
+		else
+			std::cout << "Invalid input" << std::endl;
+	}
+	catch(std::exception &e){
+		std::cout << "The number is not formatted well " << std::endl;
+	}
 	
-	ftPrintScalar(input);
 }
-
-
-//21. //funciona
-//21f //funciona
-//numero cero 0//working
-//nan nanf +inf +inff -inf -inff
