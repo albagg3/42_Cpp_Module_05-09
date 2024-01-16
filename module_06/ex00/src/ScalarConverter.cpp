@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 18:16:32 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/15 16:40:43 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:19:57 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <iomanip>
 #include <limits>
 #include <cstdlib>// me la manda poner en gitcode
+#include <cctype>
 //Constructor default
 ScalarConverter::ScalarConverter()
 {
@@ -74,8 +75,21 @@ bool	isFloat(std::string input, std::size_t idx)
 	try{
 		if(input[idx] == 'f')
 		{
-			if(input[idx + 1] == '\0' && input.find('.') != std::string::npos)
+			std::cout<< "Estoy en float"<< std::endl;
+			if(std::count(input.begin(), input.end(), '.') == 1 ) //contiene soloo un punto 
+			{
+				std::cout << "entro a buscar el punto" << std::endl;
+				int idx_point = input.find('.');
+				if(isdigit(input[idx_point + 1]))
+					return true;
+				else
+					return false;
+			}
+			if(input[idx + 1] == '\0' /*&& input.find('.') != std::string::npos*/ )
 				return true;
+
+				
+			// if(input.find('.') != std::string::npos)
 			std::cout << "Por aqu'i estoy" << std::endl;
 		}
 		return false;
@@ -173,8 +187,12 @@ void	ftPrintScalar(std::string input)
 {
 	long double input_long_double;
 	try{
-		if(input.length() == 1)
+		if(input.length() == 1 && !isdigit(input[0]))
+		{
+			std::cout << "Entro a castear el char" << std::endl;
 			input_long_double =  static_cast<double>(input[0]);
+			std::cout << "Input long double" << input_long_double << std::endl;
+		}
 		else
 		{
 			input_long_double = std::stold(input);
@@ -218,7 +236,7 @@ void ScalarConverter::convert(std::string input)
 }
 
 
-//21. 
-//21f
-//numero cero 0
+//21. //funciona
+//21f //funciona
+//numero cero 0//working
 //nan nanf +inf +inff -inf -inff
