@@ -6,34 +6,92 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 17:13:28 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/17 11:42:37 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:33:19 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/Serializer.hpp"
+#include <iostream>
+#include "../inc/Base.hpp"
+#include "../inc/A.hpp"
+#include "../inc/B.hpp"
+#include "../inc/C.hpp"
+
+
+Base* generate(void)
+{
+	std::srand(std::time(nullptr));
+	int random_value = 1 + std::rand() % 3;
+	switch(random_value)
+	{
+		case 1:
+			return new A();
+		case 2:
+			return new B();
+		case 3:
+			return new C();
+	}
+	return nullptr;
+}
+
+//A pointer can be null thats why we can check if the type corresponds with an if
+void identify(Base* p)
+{
+	if (dynamic_cast<A*>(p))
+	{
+		std::cout << "A" << std::endl;
+	}
+	else if (dynamic_cast<B*>(p))
+	{
+		std::cout << "B" << std::endl;
+	}
+	else if (dynamic_cast<C*>(p))
+	{
+		std::cout << "C" << std::endl;
+	}
+	else
+	{
+		std::cout << "It's not A, B or C" << std::endl;
+	}
+}
+
+//A reference can't be null thats why we can check if the type corresponds with a try catch
+void identify(Base& p)
+{ 
+	try{
+		Base try_A = dynamic_cast<A&>(p);
+		std::cout << "A" << std::endl;
+		return ;
+	}catch(std::exception &e)
+	{
+		;
+	}
+	try{
+		Base try_B = dynamic_cast<B&>(p);
+		std::cout << "B" << std::endl;
+		return ;
+	}catch(std::exception &e)
+	{
+		;
+	}
+	try{
+		Base try_C = dynamic_cast<C&>(p);
+		std::cout << "C" << std::endl;
+		return ;
+	}catch(std::exception &e)
+	{
+		;
+	}
+	std::cout << "It's not A, B or C" << std::endl;
+
+}
 
 int	main()
 {
-	Data data;
-	data.data_int = 42;
-	data.data_str = "hola";
+	Base* base_random;
 	
-    uintptr_t serializedPtr = Serializer::serialize(&data);
-	
-    // Deserialize the pointer
-    Data* deserializedPtr = Serializer::deserialize(serializedPtr);
-
-    // Check if deserialized pointer is equal to the original pointer
-    if (deserializedPtr == &data) {
-        std::cout << "Serialization and deserialization successful!\n";
-        std::cout << "Original Data int value: " << data.data_int<< "\n";
-        std::cout << "Original Data str value: " << data.data_str<< "\n";
-        std::cout << "We have created a data struct and casted it to serializedPtr: " << &data<< "\n";
-        std::cout << "We have deserialized serializedPtr and the pointer is: " << deserializedPtr<< "\n";
-
-    } else {
-        std::cout << "Serialization and deserialization failed!\n";
-    }
-
-    return 0;
+	base_random = generate();
+	std::cout << "Identify passing a pointer" << std::endl;
+	identify(base_random);
+	std::cout << "Identify passing a reference" << std::endl;
+	identify(*base_random);
 }
