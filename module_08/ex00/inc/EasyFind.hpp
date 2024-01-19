@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Iter.hpp                                           :+:      :+:    :+:   */
+/*   EasyFind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 10:43:10 by albagarc          #+#    #+#             */
-/*   Updated: 2024/01/18 14:38:04 by albagarc         ###   ########.fr       */
+/*   Created: 2024/01/19 12:38:35 by albagarc          #+#    #+#             */
+/*   Updated: 2024/01/19 15:41:26 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_H
-# define ITER_H
+#ifndef EASYFIND_H
+#define EASYFIND_H
 
-#include <cstdlib>
-
-template< typename T >
-void	iter(T* address, const size_t arr_length, void(*functionToApply)(T& element))
+< template >< typename T >
+T::iterator idx easyFind(const T& container, int to_find)
 {
-	for (size_t i = 0; i < arr_length; i++)
-	{
-		functionToApply(address[i]);
-	}
+	T::iterator	idx;
+	for()
 }
+
 
 #endif
