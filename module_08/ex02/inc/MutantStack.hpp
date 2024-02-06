@@ -10,16 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MUTANTSTACK_H
-# define MUTANTSTACK_H
+#ifndef __MUTANTSTACK__H__
+#define __MUTANTSTACK__H__
 
-template < typename T >
-class MutantStack : public std::stack<T>
+#include <iostream>
+#include <stack>
+#include <list>
+#include <deque>
+#include <algorithm>
+#include<iterator>
+
+template <class T, class container = std::deque<T> >
+class  MutantStack : public std::stack<T> 
 {
-	private:
+    public:
+        MutantStack(){}
+        ~MutantStack(){}
+        MutantStack(const MutantStack &original)
+        {
+            *this = original;
+        }
+        MutantStack&    operator=( const MutantStack& rhs )
+        {
+            std::stack< T, container >::operator=( rhs );
+            return *this;
+        }
+        typedef typename container::iterator iterator;// tipo de dato typename container::iterator, para hacelro mas corto hacemos un typdef y lo llamamos iterator
+        iterator begin() {
+            return this->c.begin(); //estamos accediendo al contenedor que tiene el stack
+        }
 
-	public:
-	
+        iterator end() {
+            return this->c.end();
+        }
 };
 
 #endif
