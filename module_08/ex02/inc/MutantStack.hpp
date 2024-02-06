@@ -26,7 +26,7 @@ class  MutantStack : public std::stack<T>
     public:
         MutantStack(){}
         ~MutantStack(){}
-        MutantStack(const MutantStack &original)
+        MutantStack(const MutantStack &original): std::stack<T, container>(original)
         {
             *this = original;
         }
