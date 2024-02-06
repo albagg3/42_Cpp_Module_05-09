@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:54:17 by albagarc          #+#    #+#             */
-/*   Updated: 2024/02/06 15:03:37 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:42:48 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 #include<list>
 #include <iostream>
 // #include <iterator>
-// #include <algorithm>
+#include <algorithm> //sort
+#include <vector> //sort
 
 class Span
 {
 	private:
 		unsigned int	_maximum;
-		std::list<unsigned int>	_list;
+		std::list<int>	_list;
 
 	public:
 		Span();
@@ -33,7 +34,8 @@ class Span
 
 		Span&	operator=(const Span& rhs);
 
-		void					addNumber(unsigned int number);
+		void					addNumber(int number);
+		void					addNumbers(std::list<int>::iterator begin, std::list<int>::iterator end);
 		void					printList();
 		unsigned int			shortestSpan();
 		unsigned int			longestSpan();
