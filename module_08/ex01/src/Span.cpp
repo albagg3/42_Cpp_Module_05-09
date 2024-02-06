@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:17:46 by albagarc          #+#    #+#             */
-/*   Updated: 2024/02/06 15:03:10 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:15:20 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,19 @@ unsigned int	Span::shortestSpan()
 	std::list<unsigned int>::iterator it;
 	std::list<unsigned int>::iterator prevIt;
 	unsigned int	shortestSpan = std::numeric_limits<unsigned int>::max();
-	
-	prevIt = this->_list.begin();	
-	for(it = ++this->_list.begin(); it != this->_list.end(); ++it)
+	if (this->_list.size() > 1)
 	{
-		if ((*it - *prevIt) < shortestSpan)
-			shortestSpan = *it - *prevIt;
-		prevIt = it;
+		prevIt = this->_list.begin();	
+		for(it = ++this->_list.begin(); it != this->_list.end(); ++it)
+		{
+			if ((*it - *prevIt) < shortestSpan)
+				shortestSpan = *it - *prevIt;
+			prevIt = it;
+		}
+
 	}
+	else
+		throw Span::NotEnoughNumbersException();
 	return shortestSpan;
 }
 
@@ -125,5 +130,5 @@ const char * Span::SpanFullException::what() const throw()
 const char * Span::NotEnoughNumbersException::what() const throw()
 {
 
-	return ("The Span is full");
+	return ("Please add more numbers to the Span");
 }
