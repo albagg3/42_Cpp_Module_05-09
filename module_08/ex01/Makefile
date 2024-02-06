@@ -2,7 +2,7 @@
 #-Wshadow : flag que te avisa si tienes variables con el mismo nombre aunque no se afecten unas a otras.
 #-Wno-shadow : flag que te quita los avisos de Wshadow.
 
-NAME		=	Mutated_abomination
+NAME		=	Span
 CC			=	c++
 CFLAGS		=	-Wall -Wextra -Werror -std=c++98
 OBJ_DIR		=	obj/
