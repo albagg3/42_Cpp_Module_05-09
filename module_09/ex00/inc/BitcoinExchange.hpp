@@ -6,7 +6,7 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:11:27 by albagarc          #+#    #+#             */
-/*   Updated: 2024/02/15 16:42:05 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:27:58 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include <exception>
 #include <cstdlib>
 #include <limits>
+
+#define GREY "\e[90m"
+#define RESET "\e[0m"
 
 class BitcoinExchange
 {
