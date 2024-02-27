@@ -23,6 +23,8 @@
 
 #define GREY "\e[90m"
 #define RESET "\e[0m"
+#define RED "\e[91m"
+#define GREEN "\e[92m"
 
 class BitcoinExchange
 {
@@ -30,10 +32,10 @@ class BitcoinExchange
 		std::list<std::string>				_inputFile;
 		std::map<std::string, float>		_dataBase;
 
-		bool	_validDataBase(std::ifstream& dataBase);
-		bool	_validDate(std::string date);
-		bool	_validNum(std::string num);
-		int		_howManyDelimiters(std::string str, std::string delimiter);
+		// bool	_validDataBase(std::ifstream& dataBase);
+		// bool	_validDate(std::string date);
+		// bool	_validNum(std::string num);
+		// int		_howManyDelimiters(std::string str, std::string delimiter);
 		
 	public:
 		BitcoinExchange();
