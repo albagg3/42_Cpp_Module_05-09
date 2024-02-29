@@ -13,7 +13,7 @@ int main (int argc, char** argv)
 	{
 		// std::cout<< argv[1] << std::endl;
 		std::ifstream	inputFile(argv[1]);
-		std::ifstream	dataBase("src/data copy.csv");
+		std::ifstream	dataBase("src/data.csv");
 		if(!inputFile.is_open() || !dataBase.is_open())
 		{
 			std::cerr << "There was an error opening the files, review the paths." << std::endl;

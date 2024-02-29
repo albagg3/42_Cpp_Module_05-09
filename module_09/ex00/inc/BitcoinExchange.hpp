@@ -44,12 +44,12 @@ class BitcoinExchange
 		BitcoinExchange& operator=(const BitcoinExchange& rhs);
 
 		//EXCEPTIONS
-		// class	InvalidInputLine : public std::exception
-		// {
-		// 	public:
-		// 		virtual const char* what() const throw();
+		class	InvalidInputFormat : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
 
-		// };
+		};
 
 		class	InvalidDataBase : public std::exception
 		{
