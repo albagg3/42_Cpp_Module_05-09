@@ -11,7 +11,6 @@ int main (int argc, char** argv)
 	}
 	try
 	{
-		// std::cout<< argv[1] << std::endl;
 		std::ifstream	inputFile(argv[1]);
 		std::ifstream	dataBase("src/data.csv");
 		if(!inputFile.is_open() || !dataBase.is_open())
@@ -22,7 +21,6 @@ int main (int argc, char** argv)
 		else
 		{
 			BitcoinExchange one(inputFile, dataBase) ;
-			
 		}
 	}
 	catch (std::exception &e)

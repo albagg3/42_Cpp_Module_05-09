@@ -6,12 +6,16 @@
 /*   By: albagarc <albagarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:11:31 by albagarc          #+#    #+#             */
-/*   Updated: 2024/02/28 22:22:17 by albagarc         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:23:57 by albagarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
+
+//********* AUX FUNCTIONS *************//
+
+//Transforms a std::string to float
 float transformStrFloat(std::string value)
 {
 	const char *cstr = value.c_str();
@@ -19,18 +23,33 @@ float transformStrFloat(std::string value)
 	return numDouble;
 }
 
+//Checks if a string is a valid number
+bool strAreDigits(const char *number)
+{
+	for(size_t i = 0; i < strlen(number); i++)
+	{
+		if(!isdigit(number[i]))
+			return false;
+	}
+	return true;
+}
+
+//Checks if the date is valid
 bool validYearMonthDay(const char *year, const char *month, const char *day)
 {
-
+	if (!strAreDigits(year) || !strAreDigits(month) || !strAreDigits(day))
+	{
+		std::cout << RED << "Error: year, month and day should be numbers." << RESET << std::endl;
+		return false;
+	}
 	if (!atoi(year) || !(atoi(year) >= 2009))
 	{
-
-		// std::cout << RED << "ano menor que 2009" << RESET << std::endl;
+		std::cout << RED << "Error: too low year, no data before 2009-01-02." << RESET << std::endl;
 		return false;
 	}
 	if (!atoi(month) || !(atoi(month) > 0) || !(atoi(month) < 13))
 	{
-		// std::cout << RED << "el mes es > que 12 o < que 1" << RESET << std::endl;
+		std::cout << RED << "Error: the month should be between 1 and 12" << RESET << std::endl;
 		return false;
 	}
 	if (atoi(day) && atoi(day) > 0)
@@ -39,7 +58,7 @@ bool validYearMonthDay(const char *year, const char *month, const char *day)
 		{
 			if (atoi(day) > 29)
 			{
-				// std::cout << RED << "febrero no tiene 30 dias" << RESET << std::endl;
+				std::cout << RED << "Error: this month only have 28 days max." << RESET << std::endl;
 				return false;
 			}
 		}
@@ -47,7 +66,7 @@ bool validYearMonthDay(const char *year, const char *month, const char *day)
 		{
 			if (atoi(day) > 31)
 			{
-				// std::cout << RED << "meses con 31 dias max" << RESET << std::endl;
+				std::cout << RED << "Error: this month only have 31 days max." << RESET << std::endl;
 				return false;
 			}
 		}
@@ -55,38 +74,38 @@ bool validYearMonthDay(const char *year, const char *month, const char *day)
 		{
 			if (atoi(day) > 30)
 			{
-				// std::cout << RED << "meses con 30 dias max" << RESET << std::endl;
+				std::cout << RED << "Error: this month only have 30 days max." << RESET << std::endl;
 				return false;
 			}
 		}
 	}
-	// std::cout << GREEN << "fechaa OK " << RESET << std::endl;
 	return true;
 }
 
+
+//Checks if the numbers are valid the input and the dataBase have different requirements thats why you can turn on/off the flag dataBase
 bool validNum(std::string num, bool dataBase)
 {
 	float numDouble = transformStrFloat(num);
 	if (num != "0" && !numDouble)
 	{
-		// std::cout << RED << "atof no puede convertirlo" << RESET << std::endl;
+		std::cout << RED << "Error: not a number" << RESET << std::endl;
 		return false;
 	}
-	//SOLO PARA LOS INPUTS
 	if (numDouble > 1000 && !dataBase)
 	{
-		// std::cout << RED << "The subject says that the value can't be bigger than 1000" << RESET << std::endl;
-
+		std::cout << RED << "Error: too large number." << RESET << std::endl;
 		return false;
 	}
 	if (numDouble < 0)
 	{
-		// std::cout << RED << "menor que 0" << RESET << std::endl;
+		std::cout << RED << "Error: not a positive number." << RESET << std::endl;
 		return false;
 	}
 	return true;
 }
 
+//This function checks the number of delimiters in the dataBase the delimiter is "," in the input file is " | " in the dates is "-"
 int howManyDelimiters(std::string str, std::string delimiter)
 {
 	int times = 0;
@@ -96,11 +115,10 @@ int howManyDelimiters(std::string str, std::string delimiter)
 		++times;
 		pos += delimiter.length();
 	}
-	//    std::cout << times << std::endl;
 	return times;
 }
 
-
+//This function checks if the amount of delimiters is valid. Depending on the type of delimiter the valid amount is different
 bool	validNumberOfDelimiters(std::string line, std::string delimiter)
 {
 	int amount = 0;
@@ -109,43 +127,33 @@ bool	validNumberOfDelimiters(std::string line, std::string delimiter)
 	if (delimiter == "," || delimiter == "|")
 	{
 		if (amount != 1)
-		{
-			// std::cout << "not a valid number of delimiter" << std::endl;
 			return false;
-		}
 		if(delimiter == "|" && amount == 1)
 		{
 			if(!howManyDelimiters(line, " | "))
-			{
-				// std::cout << "wrong format of delimiter" << std::endl;
 				return false;
-			}
 		}
-			
-
-
 	}
 	if (delimiter == "-")
 	{
 		if (amount != 2)
 			return false;
 	}
-	// std::cout << GREEN << "for this line: " << line << " VALID DELIMITER" << RESET << std::endl;
 	return true;
 }
 
+//This function checks if the date has a valid format
 bool validDate(std::string date)
 {
 	if (!validNumberOfDelimiters(date, "-"))
 	{
-		// std::cout << RED << "wrong number of hyphens" <<  RESET << std::endl;
+		 std::cout << RED << "Error: wrong date format." << RESET << std::endl;
 		return false;
-
 	}
 	
 	if (date.length() != 10)
 	{
-		// std::cout << RED << "no tiene 10 digitos:  " << date.length() << RESET << std::endl;
+		 std::cout << RED << "Error: wrong date format." << RESET << std::endl;
 		return false;
 	}
 
@@ -156,23 +164,24 @@ bool validDate(std::string date)
 	const char *year_charptr = const_cast<char *>(year.c_str());
 	const char *month_charptr = const_cast<char *>(month.c_str());
 	const char *day_charptr = const_cast<char *>(day.c_str());
-	// std::cout << "year: " << year << " month: " << month << " day: " << day << std::endl;
+
 	if (validYearMonthDay(year_charptr, month_charptr, day_charptr))
 		return true;
 	return false;
 }
 
 
+//********* BITCOIN CLASS *************//
 
+//CONSTRUCTOR
 BitcoinExchange::BitcoinExchange()
 {
 	std::cout << GREY << "Default BitcoinExchange constructor called" << RESET << std::endl;
 }
 
+// CONSTRUCTOR WITH INPUT AND DATABASE
 BitcoinExchange::BitcoinExchange(std::ifstream &inputFile, std::ifstream &dataBase)
 {
-	// if(!validInputFile())
-	// 	throw BitcoinExchange::InvalidInputFile();
 	(void)inputFile;
 	if (!this->_validDataBase(dataBase))
 		throw BitcoinExchange::InvalidDataBase();
@@ -181,10 +190,13 @@ BitcoinExchange::BitcoinExchange(std::ifstream &inputFile, std::ifstream &dataBa
 	std::cout << GREY << "BitcoinExchange constructor with files called" << RESET << std::endl;
 }
 
+//COPY CONSTRUCTOR
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &original)
 {
 	*this = original;
 }
+
+//DESTRUCTOR
 BitcoinExchange::~BitcoinExchange()
 {
 	std::cout << GREY << "Default BitcoinExchange destructor called" << RESET << std::endl;
@@ -194,20 +206,15 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &rhs)
 {
 	if (this == &rhs)
 		return *this;
-	// this->_file = rhs._file;
-	// this->_dataBase = rhs._dataBase;
+	this->_dataBase = rhs._dataBase;
 	return *this;
 }
 
 //EXCEPTIONS
+
 const char *BitcoinExchange::InvalidDataBase::what() const throw()
 {
 	return ("The dataBase file is not well formatted");
-}
-
-const char *BitcoinExchange::InvalidInputFormat::what() const throw()
-{
-	return ("Error: Invalid input format");
 }
 
 //MEMBER FUNCTIONS
@@ -231,17 +238,15 @@ bool BitcoinExchange::_validDataBase(std::ifstream &dataBase)
 		{
 			float numDouble = transformStrFloat(value);
 			this->_dataBase[date] = numDouble;
-
 		}
 		else
-		{
-			// std::cout << "BAD DB" << std::endl;
 			return false;
-		}	
 	}
 	return true;
 }
 
+
+//Takes line by line the input validate it and give a result or give an error message
 void	BitcoinExchange::_exchangeInput(std::ifstream& inputFile)
 {
 	std::string line;
@@ -261,10 +266,10 @@ void	BitcoinExchange::_exchangeInput(std::ifstream& inputFile)
 			std::cout << RED << "Error: bad input => " << line << RESET << std::endl;
 			continue;
 		}
+
 		date = line.substr(0,line.find("|") - 1);
-		// std::cout << RED << "PRINTAME EL DATE: " << "[" << date << "]"<< RESET << std::endl;
 		value = line.erase(0, line.find("|") + 2);
-		// std::cout << RED << "PRINTAME EL VALUE: " << value << RESET << std::endl;
+		
 		if (validDate(date) && validNum(value, false))
 		{
 			float numDouble = transformStrFloat(value);
@@ -273,7 +278,6 @@ void	BitcoinExchange::_exchangeInput(std::ifstream& inputFile)
 				std::cout << date << " => " << value << " * " << it->second << " = " << numDouble * it->second <<std::endl;
 			else
 			{
-				// it = this->_dataBase.begin();
 				prevIt = this->_dataBase.begin();
 				for(it = this->_dataBase.begin(); it != this->_dataBase.end(); it++ )
 				{
@@ -284,16 +288,8 @@ void	BitcoinExchange::_exchangeInput(std::ifstream& inputFile)
 					}
 					prevIt = it;
 				}
-				// it = this->_dataBase.begin();
-				// std::cout << it->first << std::endl;
 			}
 		}
-		else
-		{
-			std::cout << RED << "Error: Invalid input format" << RESET << std::endl;
-			// throw BitcoinExchange::InvalidInputFormat();
-		}
-	
 	}
 	if(inputFile.eof() && empty)
 		std::cout << RED << "Error: Empty input file" << line << RESET << std::endl;
