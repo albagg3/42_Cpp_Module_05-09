@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef PMERGEME_H
-# define PMERGEME_H
-
+#define PMERGEME_H
 
 #include <iostream>
 #include <exception>
@@ -24,27 +23,27 @@
 #define RED "\e[91m"
 #define GREEN "\e[92m"
 
-class	PmergeMe
+class PmergeMe
 {
-	private:
-		
-	public:
-		PmergeMe();
-		PmergeMe(const PmergeMe& original);
-		PmergeMe(std::string input);
-		~PmergeMe();
+private:
+	void mergeInsertSortVec(std::vector<int> &vec, int left, int right);
+	void mergeInsertSortDeq(std::deque<int> &deq, int left, int right);
 
+	void mergeVec(std::vector<int> &vec, int left, int mid, int right);
+	void mergeDeq(std::deque<int> &deq, int left, int mid, int right);
 
-		PmergeMe&	operator=(const PmergeMe& rhs);
+public:
+	PmergeMe();
+	PmergeMe(const PmergeMe &original);
+	~PmergeMe();
 
+	PmergeMe &operator=(const PmergeMe &rhs);
 
-	
-	// class InvalidOrderOfOperandsAndOperators : public std::exception
-	// {
-	// 	public:
-	// 		virtual const char* what() const throw();
-	// };
+	void mergeInsertSortVector(std::vector<int> &vec);
+	void mergeInsertSortDeque(std::deque<int> &deq);
+
+	void printContainerVec(const std::vector<int> &vec) const;
+	void printContainerDeq(const std::deque<int> &deq) const;
 };
-
 
 #endif
